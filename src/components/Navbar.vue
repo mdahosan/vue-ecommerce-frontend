@@ -14,6 +14,9 @@
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
+            <b-nav-item href="#"><router-link :to="{ name: 'login'}">Login</router-link></b-nav-item>
+            <b-nav-item href="#"><router-link :to="{ name: 'register'}">Register</router-link></b-nav-item>
+
             <b-nav-form>
               <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
               <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
