@@ -3,11 +3,8 @@ npm install vue-router --save
 auth components and using it
 create routes.js and using it
 router link
-
-
-
 ##################Authentication#####################
-
+npm install vue-resource --save
 
 
 

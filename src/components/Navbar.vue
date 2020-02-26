@@ -43,10 +43,10 @@
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template v-slot:button-content>
-                <em>User</em>
+                <em>{{ userName}}</em>
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+              <b-dropdown-item href="#" @click="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -54,4 +54,35 @@
     </div>
   </div>
 </template>
+
+<script>
+    export default {
+        data(){
+            return {
+                isAuth: null,
+                userName: null
+            }
+        },
+        created(){
+            this.isAuth = this.$auth.isAuthenticated()
+            this.setAuthenticatedUser()
+        },
+        methods: {
+            setAuthenticatedUser(){
+                this.$http.get('api/user')
+                    .then(response => {
+                        this.$auth.setAuthenticatedUser(response.body);
+                        this.userName = response.body.name;
+                        // console.log(this.$auth.getAuthenticatedUser());
+                    })
+            },
+            logout() {
+                this.$auth.destroyToken()
+                this.isAuth = this.$auth.isAuthenticated()
+                this.$router.push('/login')
+            }
+        }
+    }
+</script>
+
 

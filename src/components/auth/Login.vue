@@ -66,7 +66,22 @@
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        alert(JSON.stringify(this.form))
+        // alert(JSON.stringify(this.form))
+
+          var data = {
+              client_id : 4,
+              client_secret : 'kaj9ef9hnTUZVm98R8hUrXVHkq96EmiHJOTkk05j',
+              grant_type : 'password',
+              username : this.form.email,
+              password : this.form.password,
+          };
+
+          this.$http.post('http://laravel6.test/oauth/token', data)
+              .then(response => {
+                  console.log(response);
+                  this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
+                  this.$router.push('/home')
+              })
       },
       onReset(evt) {
         evt.preventDefault();
