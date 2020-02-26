@@ -4,17 +4,18 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Router from "../routes";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import VueResource from 'vue-resource';
 import Auth from './packages/auth'
+import axios from 'axios'
 // Install BootstrapVue
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
-Vue.use(VueResource);
-Vue.use(Auth)
+Vue.use(Auth);
 
-Vue.http.options.root = 'http://laravel6.test'
-Vue.http.headers.common['Authorization'] = 'Bearer '+Vue.auth.getToken()
+axios.defaults.baseURL = 'http://laravel6.test/';
+axios.defaults.params = {}
+axios.defaults.headers.common['Authorization'] = 'Bearer '+Vue.auth.getToken();;
+Vue.prototype.$http = axios;
 
 Router.beforeEach(
   (to, from, next) => {

@@ -79,7 +79,7 @@
           this.$http.post('http://laravel6.test/oauth/token', data)
               .then(response => {
                   console.log(response);
-                  this.$auth.setToken(response.body.access_token, response.body.expires_in + Date.now())
+                  this.$auth.setToken(response.data.access_token, response.data.expires_in + Date.now())
                   this.$router.push('/home')
               })
       },
@@ -90,9 +90,7 @@
         this.form.password = '';
         // Trick to reset/clear native browser form validation state
         this.show = false;
-        this.$nextTick(() => {
-          this.show = true
-        })
+
       }
     }
   }

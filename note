@@ -4,7 +4,9 @@ auth components and using it
 create routes.js and using it
 router link
 ##################Authentication#####################
-npm install vue-resource --save
+npm install vue-resource --save //
+npm install --save axios // using axios instead of vue-resource
+
 
 
 

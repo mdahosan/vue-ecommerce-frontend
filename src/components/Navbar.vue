@@ -71,8 +71,8 @@
             setAuthenticatedUser(){
                 this.$http.get('api/user')
                     .then(response => {
-                        this.$auth.setAuthenticatedUser(response.body);
-                        this.userName = response.body.name;
+                        this.$auth.setAuthenticatedUser(response.data);
+                        this.userName = response.data.name;
                         // console.log(this.$auth.getAuthenticatedUser());
                     })
             },
