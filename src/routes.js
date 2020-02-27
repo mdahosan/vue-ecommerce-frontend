@@ -3,9 +3,9 @@ import Vue from 'vue'
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
-import Login from "./src/components/auth/Login";
-import Register from "./src/components/auth/Register";
-import Home from "./src/components/Home"
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import Home from "./components/Home"
 
 const routes = [
   {

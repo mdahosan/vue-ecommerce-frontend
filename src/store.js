@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from './axios-auth'
-import router from '../routes';
+import router from './routes';
 
 axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
 
