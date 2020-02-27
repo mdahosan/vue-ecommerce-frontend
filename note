@@ -7,6 +7,7 @@ router link
 npm install vue-resource --save //
 npm install --save axios // using axios instead of vue-resource
 
+npm install --save vuex  //for state management
 
 
 

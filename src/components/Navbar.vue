@@ -14,19 +14,17 @@
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <b-nav-item>
-<!--              <b-button size="sm" class="my-2 my-sm-0" type="submit">-->
+            <b-nav-item v-if="!auth">
                 <router-link tag="button" class="btn btn-secondary btn-sm my-2 my-sm-0" :to="{ name: 'login'}" active-class="active">Login</router-link>
-<!--              </b-button>-->
             </b-nav-item>
 
-
-            <b-nav-item>
-              <!--              <b-button size="sm" class="my-2 my-sm-0" type="submit">-->
+            <b-nav-item v-if="!auth">
               <router-link tag="button" class="btn btn-secondary btn-sm my-2 my-sm-0" :to="{ name: 'register'}" active-class="active">Register</router-link>
-              <!--              </b-button>-->
             </b-nav-item>
 
+            <b-nav-item v-if="auth">
+              <router-link tag="button" class="btn btn-secondary btn-sm my-2 my-sm-0" :to="{ name: 'home'}" active-class="active">Home</router-link>
+            </b-nav-item>
 
             <b-nav-form>
               <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
@@ -40,10 +38,10 @@
               <b-dropdown-item href="#">FA</b-dropdown-item>
             </b-nav-item-dropdown>
 
-            <b-nav-item-dropdown right>
+            <b-nav-item-dropdown right v-if="auth">
               <!-- Using 'button-content' slot -->
               <template v-slot:button-content>
-                <em>{{ userName}}</em>
+                <em>{{ user.name}}</em>
               </template>
               <b-dropdown-item href="#">Profile</b-dropdown-item>
               <b-dropdown-item href="#" @click="logout">Sign Out</b-dropdown-item>
@@ -55,34 +53,21 @@
   </div>
 </template>
 
+
 <script>
     export default {
-        data(){
-            return {
-                isAuth: null,
-                userName: null
+        computed: {
+            auth(){
+                return this.$store.getters.isAuthenticated
+            },
+            user () {
+                return !this.$store.getters.user ? false : this.$store.getters.user;
             }
         },
-        created(){
-            this.isAuth = this.$auth.isAuthenticated()
-            this.setAuthenticatedUser()
-        },
         methods: {
-            setAuthenticatedUser(){
-                this.$http.get('api/user')
-                    .then(response => {
-                        this.$auth.setAuthenticatedUser(response.data);
-                        this.userName = response.data.name;
-                        // console.log(this.$auth.getAuthenticatedUser());
-                    })
-            },
-            logout() {
-                this.$auth.destroyToken()
-                this.isAuth = this.$auth.isAuthenticated()
-                this.$router.push('/login')
+            logout(){
+                this.$store.dispatch('logout')
             }
         }
     }
 </script>
-
-
