@@ -7,6 +7,7 @@ Vue.use(VueRouter);
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Home from "./components/Home"
+import Welcome from "./components/Welcome"
 
 const routes = [
   {
@@ -31,6 +32,14 @@ const routes = [
     component: Home,
     meta: {
       forAuth: true
+    }
+  },
+  {
+    path: '/',
+    name: 'welcome',
+    component: Welcome,
+    meta: {
+      forVisitors: true
     }
   }
 ]

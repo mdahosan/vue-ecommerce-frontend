@@ -1,10 +1,12 @@
 <template>
   <div>
     Welcome To Homepage
+    <my-products></my-products>
   </div>
 </template>
 
 <script>
+
     export default {
         computed: {
             email () {

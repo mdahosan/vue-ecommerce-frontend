@@ -37,7 +37,7 @@ export default new Vuex.Store({
           localStorage.setItem('token', res.data.access_token)
           localStorage.setItem('expirationDate', expirationDate);
 
-          axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+          axios.defaults.headers.common['Authorization'] = 'Bearer '+res.data.access_token;
 
           dispatch('fetchUser');
           router.replace('home')
@@ -81,7 +81,7 @@ export default new Vuex.Store({
       commit('authUser',{
          token: token
       })
-      router.replace('home')
+      // router.replace('home')
     }
 
   },
