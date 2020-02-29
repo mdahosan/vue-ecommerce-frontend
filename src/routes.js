@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 import VueRouter from "vue-router";
+
 Vue.use(VueRouter);
 
 import Login from "./components/auth/Login";
@@ -10,7 +11,7 @@ import Home from "./components/Home"
 const routes = [
   {
     path: '/login',
-    name:'login',
+    name: 'login',
     component: Login,
     meta: {
       forVisitors: true
@@ -18,16 +19,16 @@ const routes = [
   },
   {
     path: '/register',
-    name:'register',
-    component: Register ,
+    name: 'register',
+    component: Register,
     meta: {
       forVisitors: true
     }
   },
   {
     path: '/home',
-    name:'home',
-    component: Home ,
+    name: 'home',
+    component: Home,
     meta: {
       forAuth: true
     }

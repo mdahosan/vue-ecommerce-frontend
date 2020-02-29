@@ -8,15 +8,18 @@
 </template>
 
 <script>
-  import Navbar from "./components/Navbar";
-  import Home from "./components/Home"
+    import Navbar from "./components/Navbar";
+    import Home from "./components/Home"
 
-  export default {
-    components: {
-      'navbar': Navbar,
-      'home': Home
+    export default {
+        components: {
+            'navbar': Navbar,
+            'home': Home
+        },
+        created() {
+            this.$store.dispatch('tryAutoLogin')
+        }
     }
-  }
 
 </script>
 

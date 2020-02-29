@@ -3,9 +3,9 @@ import Vuex from 'vuex'
 import axios from './axios-auth'
 import router from './routes';
 
-axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
-
 Vue.use(Vuex)
+
+axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
 
 export default new Vuex.Store({
   state: {
@@ -24,17 +24,24 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    login ({commit}, authData) {
+    login ({commit, dispatch}, authData) {
       axios.post('/oauth/token', authData)
         .then(res => {
-          console.log(res);
-          console.log(res.data.access_token)
           commit('authUser', {
             token: res.data.access_token,
           })
+          //
+          dispatch('setLogoutTimer', res.data.expires_in)
+          const now = new Date();
+          const expirationDate = new Date(now.getTime() + res.data.expires_in * 1000);
           localStorage.setItem('token', res.data.access_token)
-          this.dispatch('fetchUser');
+          localStorage.setItem('expirationDate', expirationDate);
+
+          axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem('token');
+
+          dispatch('fetchUser');
           router.replace('home')
+
         })
         .catch(error => console.log(error))
     },
@@ -50,10 +57,33 @@ export default new Vuex.Store({
         })
         .catch(error => console.log(error))
     },
+    setLogoutTimer({commit, dispatch}, expirationTime){
+      setTimeout(()=>{
+        dispatch('logout');
+      }, expirationTime);
+    },
     logout({commit}){
       commit('clearAuthData');
+      localStorage.removeItem('token')
+      localStorage.removeItem('expirationDate')
       router.replace('login')
+    },
+    tryAutoLogin({commit}){
+      const token = localStorage.getItem('token');
+      if(!token){
+        return
+      }
+      const expirationDate = localStorage.getItem('expirationDate');
+      const now = new Date();
+      if(now >= expirationDate){
+        return
+      }
+      commit('authUser',{
+         token: token
+      })
+      router.replace('home')
     }
+
   },
   getters: {
     user (state) {

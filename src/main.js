@@ -20,6 +20,7 @@ Router.beforeEach(
         })
       }else next()
     }else if(to.matched.some(record => record.meta.forAuth)){
+      // console.log('Hello')
       if(! Store.getters.isAuthenticated){
         next({
           path: '/login'
