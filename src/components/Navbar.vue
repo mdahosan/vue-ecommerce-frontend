@@ -2,7 +2,11 @@
   <div id="app">
     <div>
       <b-navbar toggleable="lg" type="dark" variant="info">
-        <b-navbar-brand href="#">NavBar</b-navbar-brand>
+
+        <router-link
+          :to="'/'">
+          <b-navbar-brand >E-Com</b-navbar-brand>
+        </router-link>
 
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -23,7 +27,7 @@
             </b-nav-item>
 
             <b-nav-item v-if="auth">
-              <router-link tag="button" class="btn btn-secondary btn-sm my-2 my-sm-0" :to="{ name: 'home'}" active-class="active">Home</router-link>
+              <router-link tag="button" class="btn btn-secondary btn-sm my-2 my-sm-0" :to="{ name: 'home'}" active-class="active">Dashboard</router-link>
             </b-nav-item>
 
             <b-nav-form>

@@ -11,24 +11,7 @@ Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
 
-Router.beforeEach(
-  (to, from, next) => {
-    if(to.matched.some(record => record.meta.forVisitors)){
-      if(Store.getters.isAuthenticated){
-        next({
-          path: '/home'
-        })
-      }else next()
-    }else if(to.matched.some(record => record.meta.forAuth)){
-      // console.log('Hello')
-      if(! Store.getters.isAuthenticated){
-        next({
-          path: '/login'
-        })
-      }else next()
-    } else next()
-  }
-);
+// const API_URL = 'test url';
 
 new Vue({
   el: '#app',

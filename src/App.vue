@@ -9,12 +9,11 @@
 
 <script>
     import Navbar from "./components/Navbar";
-    import Home from "./components/Home"
+    // import Home from "./components/Home"
 
     export default {
         components: {
             'navbar': Navbar,
-            'home': Home
         },
         created() {
             this.$store.dispatch('tryAutoLogin')

@@ -9,6 +9,22 @@ npm install --save axios // using axios instead of vue-resource
 
 npm install --save vuex  //for state management
 
-
-
+// Router.beforeEach(
+//   (to, from, next) => {
+//     if(to.matched.some(record => record.meta.forVisitors)){
+//       if(Store.getters.isAuthenticated){
+//         next({
+//           path: '/home'
+//         })
+//       }else next()
+//     }else if(to.matched.some(record => record.meta.forAuth)){
+//       // console.log('Hello')
+//       if(! Store.getters.isAuthenticated){
+//         next({
+//           path: '/login'
+//         })
+//       }else next()
+//     } else next()
+//   }
+// );
 

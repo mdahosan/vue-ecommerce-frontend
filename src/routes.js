@@ -8,40 +8,34 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Home from "./components/Home"
 import Welcome from "./components/Welcome"
+import ProductDetails from "./components/products/Details";
 
 const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login,
-    meta: {
-      forVisitors: true
-    }
+    component: Login
   },
   {
     path: '/register',
     name: 'register',
-    component: Register,
-    meta: {
-      forVisitors: true
-    }
+    component: Register
   },
   {
     path: '/home',
     name: 'home',
-    component: Home,
-    meta: {
-      forAuth: true
-    }
+    component: Home
   },
   {
     path: '/',
     name: 'welcome',
-    component: Welcome,
-    meta: {
-      forVisitors: true
-    }
+    component: Welcome
+  },
+  {
+    path: '/products/:product',
+    component: ProductDetails
   }
+
 ]
 
 const Router = new VueRouter({

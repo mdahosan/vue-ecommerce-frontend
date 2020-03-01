@@ -57,8 +57,8 @@
     },
     methods: {
       onSubmit(evt) {
-        evt.preventDefault()
-          var data = {
+        evt.preventDefault();
+          let data = {
               client_id : 4,
               client_secret : 'kaj9ef9hnTUZVm98R8hUrXVHkq96EmiHJOTkk05j',
               grant_type : 'password',

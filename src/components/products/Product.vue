@@ -6,10 +6,11 @@
         <h5 class="card-title">{{ product.title}}</h5>
         <p class="card-text">{{ product.price}}</p>
       </div>
-<!--      <div class="card-footer">-->
-<!--        <a href="#" class="btn btn-success">Buy</a>-->
-<!--      </div>-->
       <div class="card-footer">
+        <router-link
+          :to="'/products/' + product.id "
+          class="btn btn-outline-success btn-sm"
+        >Show</router-link>
 
       </div>
     </div>
@@ -17,8 +18,19 @@
 </template>
 
 <script>
+    import axios from '../../axios-auth'
+
     export default {
-        props: ['product']
+        props: ['product'],
+        methods: {
+            show(){
+                let page_url = `api/products/${this.product.id}`
+                axios.get(page_url)
+                    .then(response => {
+                        console.log(response)
+                    }).catch(err => console.log(err))
+            },
+        }
     }
 </script>
 

@@ -10,7 +10,7 @@ axios.defaults.headers.common['Authorization'] = 'Bearer '+localStorage.getItem(
 export default new Vuex.Store({
   state: {
     token: null,
-    user: null
+    user: null,
   },
   mutations: {
     authUser (state, userData) {
@@ -27,13 +27,18 @@ export default new Vuex.Store({
     login ({commit, dispatch}, authData) {
       axios.post('/oauth/token', authData)
         .then(res => {
+          console.log(res);
+
           commit('authUser', {
             token: res.data.access_token,
-          })
-          //
+          });
+
           dispatch('setLogoutTimer', res.data.expires_in)
+
           const now = new Date();
           const expirationDate = new Date(now.getTime() + res.data.expires_in * 1000);
+
+
           localStorage.setItem('token', res.data.access_token)
           localStorage.setItem('expirationDate', expirationDate);
 
@@ -45,6 +50,7 @@ export default new Vuex.Store({
         })
         .catch(error => console.log(error))
     },
+
     fetchUser ({commit, state}) {
 
       if (!state.token) {
@@ -57,17 +63,20 @@ export default new Vuex.Store({
         })
         .catch(error => console.log(error))
     },
+
     setLogoutTimer({commit, dispatch}, expirationTime){
       setTimeout(()=>{
         dispatch('logout');
       }, expirationTime);
     },
+
     logout({commit}){
       commit('clearAuthData');
       localStorage.removeItem('token')
       localStorage.removeItem('expirationDate')
       router.replace('login')
     },
+
     tryAutoLogin({commit}){
       const token = localStorage.getItem('token');
       if(!token){
@@ -83,7 +92,6 @@ export default new Vuex.Store({
       })
       // router.replace('home')
     }
-
   },
   getters: {
     user (state) {
