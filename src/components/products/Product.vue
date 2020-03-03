@@ -12,6 +12,13 @@
           class="btn btn-outline-success btn-sm"
         >Show</router-link>
 
+        <router-link
+          :to="{ name: 'products.edit', params: { product: product.id }}"
+          class="btn btn-outline-warning btn-sm"
+        >Edit</router-link>
+
+        <button  class="btn btn-outline-warning btn-sm" @click="destroy( product.id)">Delete</button>
+
       </div>
     </div>
   </div>
@@ -19,6 +26,7 @@
 
 <script>
     import axios from '../../axios-auth'
+    import Router from "../../routes";
 
     export default {
         props: ['product'],
@@ -30,6 +38,12 @@
                         console.log(response)
                     }).catch(err => console.log(err))
             },
+            destroy(productId){
+                axios.get('api/products/' + productId+'/delete')
+                    .then(response => {
+                       Router.replace('/');
+                    }).catch(err => console.log(err))
+            }
         }
     }
 </script>

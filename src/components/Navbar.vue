@@ -30,6 +30,10 @@
               <router-link tag="button" class="btn btn-secondary btn-sm my-2 my-sm-0" :to="{ name: 'home'}" active-class="active">Dashboard</router-link>
             </b-nav-item>
 
+            <b-nav-item v-if="auth">
+              <router-link tag="button" class="btn btn-secondary btn-sm my-2 my-sm-0" :to="{ name: 'products.create'}" active-class="active">Add New Product</router-link>
+            </b-nav-item>
+
             <b-nav-form>
               <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
               <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>

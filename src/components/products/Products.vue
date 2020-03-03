@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div class="row">
-      <my-product class="item"
+
+    <div v-masonry transition-duration="0.3s" item-selector=".item" class="row">
+      <my-product v-masonry-tile class="item"
                   v-for="product in products"
                   :product="product"
                   :key="product.id">
